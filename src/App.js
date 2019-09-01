@@ -1,11 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import clsx from 'clsx';
+import DrawerComponent from './components/DrawerComponent';
+import AppBarComponent from './components/AppBar';
+import MainPage from './components';
+import useStyles from './style';
 
-function App() {
+export default function App() {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  const props = {open, setOpen, handleDrawerOpen}
   return (
-    <React.Fragment>Hello Hooks</React.Fragment>
+    <div className={classes.root}>
+      <AppBarComponent classes={classes} {...props}/>
+      <DrawerComponent classes={classes} handleDrawerClose={handleDrawerClose} open={open}/>
+      <MainPage classes={classes} fixedHeightPaper={fixedHeightPaper}/>
+    </div>
   );
 }
 
-export default App;
