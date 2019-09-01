@@ -10,3 +10,14 @@ export default function Hook() {
   const classes = useStyles(); // this is how we use hook style
   return <Button className={classes.root}>Hook</Button>;
 }
+
+#HOC styles
+import { withStyles } from '@material-ui/styles';
+const styles = {
+  root: { padding: '0 30px' },
+};
+function HigherOrderComponent(props) {
+  const { classes } = props;
+  return <Button className={classes.root}>Higher-order component</Button>;
+}
+export default withStyles(styles)(HigherOrderComponent);
